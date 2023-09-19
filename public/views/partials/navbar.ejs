@@ -1,0 +1,35 @@
+<div class="header_container">
+    <img src="../../assets/logo.png" alt="dtract logo" class="header_logo" />
+    <!-- Desktop Navbar -->
+    <ul>
+        <!-- Always renders -->
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/help">Help</a></li>
+        <!-- Conditionally renders -->
+        <% if (locals.user) { %>
+            <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+            <li><a href="/">Login</a></li>
+        <% } %>
+    </ul>
+    <!-- Mobile Toggle -->
+    <button class="mobilenav_button" onclick="ToggleMenu()"><i class="fa-solid fa-bars" id="Icon" style="color: #381727;"></i></button>
+</div>
+<!-- Mobile Navbar -->
+<div class="mobilenav_overlay" id="mobile_overlay" style="display: none;">
+    <div class="mobilenav_menu" id="mobile_menu" style="display: none;">
+        <ul>
+            <!-- Always renders -->
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/help">Help</a></li>
+            <!-- Conditionally renders -->
+            <% if (locals.user) { %>
+                <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+                <li><a href="/">Login</a></li>
+            <% } %>
+        </ul>
+    </div>
+</div>

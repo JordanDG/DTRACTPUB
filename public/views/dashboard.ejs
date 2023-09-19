@@ -1,0 +1,110 @@
+<!-- For older browsers -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Defines the character set in use -->
+        <meta charset="UTF-8">
+        <!-- Defines default page scaling for responsive web design -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Decide what version of IE the page is rendered through -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Page title -->
+        <title>DTRACT | Dashboard</title>
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="/public/css/styles.css">
+        <!-- JS Script -->
+        <script src="/public/js/script.js"></script>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <!-- Icons -->
+        <script src="https://kit.fontawesome.com/ba3b736cb2.js" crossorigin="anonymous"></script>
+        <!-- Favicon Config -->
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+        <link rel="manifest" href="assets/site.webmanifest">
+        <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="assets/favicon.ico">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="assets/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <body>
+        <header>
+            <%- include('./partials/Navbar.ejs') %>
+        </header>
+        <!-- Tutorial Page -->
+        <% if(results[0].TutorialComplete == 'false') { %>
+            <section class="tutorial_container">
+                <img src="../../assets/DTRACT_THUMBNAIL.png" alt="logo" />
+                <h1 id="tut_title">Welcome to DTRACT</h1>
+                <p id="tut_text">Setup is super easy and takes very little time. In order to track your progress towards a target of choice, simply input the number of weekly hours you'd <b>like</b> to spend each week in digital activities. We recommend two hours each day (14 hours weekly), however you can tailor the target to your needs.</p>
+                <form method="POST" action="/updateusers" id="tut_form">
+                    <h1>Weekly Hour Target:</h1>
+                    <input id="tut_input" type="number" required placeholder="14" min="0" max="30" name="form_hours"/>
+                    <button onclick="UpdateProgressCheck()">Continue</button>
+                </form>
+                <button class="replacementbtn" id="replacementbtn" onclick="UpdateProgressCheck()">Continue</button>
+                <form id="tut_button_final_form" method="POST" action="/finalisetut">
+                    <button class="completebtn" id="completebtn" type="submit">Complete</button>
+                </form>
+                <p id="tut_progress">Step 1/3</p>
+            </section>
+        <% }  else { %>
+            <section class="dashboard_container">
+                <span>Signed in as: <%= results[0].Email %> - Not You? <a href="/logout">Sign Out</a></span>
+                <% if (results[0].CurrentWeekTotal < results[0].WeeklyTarget) { %>
+                    <div class="dash_activity_circle" style="border: 5px solid green">
+                <% } else { %>
+                    <div class="dash_activity_circle" style="border: 5px solid red">
+                <% } %>
+                    <p class="dash_activity_text"><%= results[0].WeeklyTarget %> Hours Per Week</p>
+                    <p class="dash_activity_text_subtitle">
+                        <% if (results[0].WeeklyTarget - results[0].CurrentWeekTotal > 0) { %>
+                            <%- results[0].WeeklyTarget - results[0].CurrentWeekTotal %> Remaining
+                        <% } else { %>
+                            <%- results[0].WeeklyTarget - results[0].CurrentWeekTotal %> Over Target
+                        <% } %>
+                    </p>
+                    </div>
+                <button class="dash_add_activity"><a href="/add">Add Activity</a></button>
+                <div class="tabs_container">
+                    <h1 class="section_title activetab" id="BtnTips" onclick="ToggleOpenMenu('Activity')">Activity</h1>
+                    <h1 class="section_title" id="BtnActivity" onclick="ToggleOpenMenu('Tips')">Tips</h1>
+                </div>
+                <div class="toggle_container">
+                    <div class="contents_activity showme" id="contents_Activity">
+                        <% if(results2.length == 0) { %>
+                            <p class="activity_empty">Nothing To Display For The Week Here.</p>
+                        <% } else { %>
+                            <% results2.forEach(row=>{ %>
+                                <div class="activity_container">
+                                    <% if (row.Activity_Title == "Gaming") { %>
+                                        <img src="https://i.imgur.com/pq20Ib4.png" alt="Icon_Gaming" class="activity_icon" />
+                                    <% } else if (row.Activity_Title == "Streaming") { %>
+                                        <img src="https://i.imgur.com/LaDbDV5.png" alt="Icon_Streaming" class="activity_icon" />
+                                    <% } else if (row.Activity_Title == "TV") { %>
+                                        <img src="https://i.imgur.com/A5Rnt2J.png" alt="Icon_TV" class="activity_icon" />
+                                    <% } %>
+                                    <h1><%= row.Activity_Title %></h1>
+                                    <p>Duration: <%= row.Activity_Duration %> <%= row.Activity_Format %>(s)</p>
+                                    <p>Note: <%= row.Activity_Note %></p>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <div class="contents_tips hideme" id="contents_tips">
+                        <% results3.forEach(row=>{ %>
+                            <div class="activity_container">
+                                <img src="https://i.imgur.com/qcjEXqO.png" alt="Icon_Tips" class="activity_icon" />
+                                <p class="tip_tip"><%= row.Tip_Contents %></p>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </section>
+        <% } %>
+    </body>
+</html>

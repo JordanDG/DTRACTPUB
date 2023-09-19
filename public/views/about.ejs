@@ -1,0 +1,66 @@
+<!-- For older browsers -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Defines the character set in use -->
+        <meta charset="UTF-8">
+        <!-- Defines default page scaling for responsive web design -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Decide what version of IE the page is rendered through -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Page title -->
+        <title>DTRACT | About</title>
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="/public/css/styles.css">
+        <!-- JS Script -->
+        <script src="/public/js/script.js"></script>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <!-- Icons -->
+        <script src="https://kit.fontawesome.com/ba3b736cb2.js" crossorigin="anonymous"></script>
+        <!-- Favicon Config -->
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+        <link rel="manifest" href="assets/site.webmanifest">
+        <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="assets/favicon.ico">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="assets/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <body>
+        <header>
+            <%- include('./partials/Navbar.ejs') %>
+        </header>
+        <section class="about_container">
+            <div class="about_row_left">
+                <h1>About DTRACT</h1>
+                <p>The aim of DTRACT is to provide those in need with a platform to organically reduce the amount of time they spend online. Online activity detracts from professional, academic and social capabilities, particularly in young adults. In a world where they're already struggling to balance their activities, activities of this nature can cause potentially irreversible problems.</p>
+            </div>
+            <div class="about_row_right">
+                <div class="about_aligner_images">
+                    <img src="../assets/icon_tracking.png" alt="activity tracking icon" />
+                    <img src="../assets/icon_tips.png" alt="activity tips icon" />
+                    <img src="../assets/icon_reports.png" alt="activity reports icon" />
+                </div>
+                <div class="about_aligner_right">
+                    <h1>Features</h1>
+                    <ul>
+                        <li>Activity Tracking -</li>
+                        <li>Useful Tips -</li>
+                        <li>Weekly Reports -</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="about_row_left">
+                <div class="about_aligner_left">
+                    <h1>But Why?</h1>
+                    <p>This website was created as a supplication to an MSc. dissertation project investigating the degree to which these aforementioned digital activities negatively imapct aspects of student life, with a particular focus on education and university environments. The application will be accessed by several prospective users over a short-term access period to identify suitaiblity to address the problem at large. This will be achieved by the integration of several interviews to afford the opportunity to collect insightful data into how prospective users felt about DTRACT, along with whether they believe it to be a suitable remedial application to solve the overarching research question. Whilst research into this subject area is plentiful, few go into any real depth to investigate the root cause of the issue, and none of those analysed went further still to design, develop, implement and evaluate a remedial application of this nature. This work will further broaden the knowledge-base of this subject area, providing solid foundation for further work.</p>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
